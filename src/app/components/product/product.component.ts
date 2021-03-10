@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductResponseModel } from 'src/app/models/productResponseModel';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { observable } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 
 //axios,fetch
 @Component({
@@ -12,7 +13,7 @@ import { observable } from 'rxjs';
 })
 export class ProductComponent implements OnInit {
 
-  apiUrl = "https://localhost:44300/api/products/getall";
+  // apiUrl = "https://localhost:44300/api/products/getall";
 
 
   //OnInit ne demek ?
@@ -37,15 +38,19 @@ export class ProductComponent implements OnInit {
   //   message:"",
   //   success:true
   // };
+  dataLoaded = false; //data koyduk yönetmek için
 
 //burada private httpClient:HttpClient http client tipinde bir nesne istiyorum diyorsunuz !!
 //ctor da verdiğiniz değişken class içerisinde tanımlanmış bir değişken gibi oluyor ve buna heryerden erişebiliyoruz !!
-  constructor(private httpClient:HttpClient) { }
+
+//bir service i kullanabilmek için yapman gereken bu!!
+  constructor(/*private httpClient:HttpClient*/private productService: ProductService) { }
+
   //constructor ın amacı product componenti bellekte oluşturmaktır. yani bir instance ını oluşturmaktır
   //bir datayı initilize etmek dışında birşey yapılmamalıdır
 
   ngOnInit(): void {
-    console.log("Init çalıştı");
+    this.getProducts();
   }
 
   //biz her işi yapıcak nesne için bir operasyon yazıyoruz!!
@@ -60,23 +65,36 @@ export class ProductComponent implements OnInit {
 
     //javascriptte herşey fonksiyon o yüzden this dediğimde en üstteki classına karşılık geliyor
     //gelen datayı product response modeline map edeceksin demek !!
-    this.httpClient.get<ProductResponseModel>(this.apiUrl).subscribe((response) => {
-      // this.productResponseModel = response;
-      this.products = response.data;
-    });
+
+
+    // this.httpClient.get<ProductResponseModel>(this.apiUrl).subscribe((response) => {
+    //   // this.productResponseModel = response;
+    //   this.products = response.data;
+    // });
+
+
+
+
     // observable tasarım deseni kullandıkları için get i subscribe ile devam ettirmek gerekiyor.
     //subscribe ol abone ol demek
     //(response) => {} gelen yanıt için demek bu 
 
 
     /*
-    httpclient ile get iisteği yapıyorum nereye this.apiurl e
+    httpclient ile get isteği yapıyorum nereye this.apiurl e
     gelen datayı şuna pars et ProductResponseModel
-    çalıştırmak için subscribe olman lazım
-
-    
+    çalıştırmak için subscribe olman lazım    
     */
 
+
+    this.productService.getProducts().subscribe(response =>{
+      this.products = response.data;
+      this.dataLoaded=true; //bu kod senkron çalışmamızı sağlıyor
+    })
+
+    console.log();
+
+    //getProducts Observable döndürüyor. Observable demek sen buna subscribe olabilirsin demek!!
 
   }
 

@@ -8,6 +8,11 @@ import { ProductComponent } from './components/product/product.component';
 import { CategoryComponent } from './components/category/category.component';
 import { NaviComponent } from './components/navi/navi.component';
 
+//farklı yerlerden yükleyebileceğimiz yada getirebileceğimiz paketler var
+//httpClient için injection ını yapnmamızı sağlayan modülü var
+import {HttpClientModule } from "@angular/common/http";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +22,10 @@ import { NaviComponent } from './components/navi/navi.component';
     NaviComponent
   ],
   imports: [
+    //bizim yazmadıklarımızı importa ekliyoruz !!
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
