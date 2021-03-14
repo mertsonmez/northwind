@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductResponseModel } from '../models/productResponseModel';
+import { ListResponseModel } from '../models/listResponseModel';
+import { Product } from '../models/product';
 
 //Injectable görürsek bu bir servistir diyoruz!!
 //HttpClient gibi bunu enjekte edicez!
@@ -10,14 +11,18 @@ import { ProductResponseModel } from '../models/productResponseModel';
 })
 export class ProductService {
 
-
-
-
   apiUrl = 'https://localhost:44300/api/products/getall';
 
   constructor(private httpClient: HttpClient) { }
 
-  getProducts() : Observable<ProductResponseModel> { //subscribe olabilir bir response model döneceksin demek !!
+  getProducts() : Observable<ListResponseModel<Product>> { //subscribe olabilir bir response model döneceksin demek !!
+    //let keywordu kullanarak değişken tanımlayacağız ApiUrl de kullanmak için...
+    let newPath = this.apiUrl + "products/getall"
+
+    
+    
+    
+    
     //apiye httpclient nesnesi vasıtasıyla apiye bağlanıyoruz !!!!!!  
     //ilk olarak import { HttpClient } from '@angular/common/http'; ekliyoruz
     //httpclient ile bacakend birşeyine ulaşıyoruz --> videoya dön yaz  
@@ -29,23 +34,25 @@ export class ProductService {
     //gelen datayı product response modeline map edeceksin demek !!
 
 
-   return this.httpClient.get<ProductResponseModel>(this.apiUrl);
-
-
+  //  return this.httpClient.get<ListResponseModel<Product>>(this.apiUrl); eski kod
+   return this.httpClient.get<ListResponseModel<Product>>(newPath);
 
     // observable tasarım deseni kullandıkları için get i subscribe ile devam ettirmek gerekiyor.
     //subscribe ol abone ol demek
     //(response) => {} gelen yanıt için demek bu 
 
-
     /*
     httpclient ile get iisteği yapıyorum nereye this.apiurl e
     gelen datayı şuna pars et ProductResponseModel
-    çalıştırmak için subscribe olman lazım
-
-    
+    çalıştırmak için subscribe olman lazım    
     */
-
-
   }
+
+  getProductsByCategory(categoryId:number) : Observable<ListResponseModel<Product>> { 
+    let newPath = this.apiUrl + "products/getbycategory?categoryId=" + categoryId;
+
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
+  }
+
+
 }
