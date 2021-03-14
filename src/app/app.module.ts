@@ -11,6 +11,7 @@ import { NaviComponent } from './components/navi/navi.component';
 //farklı yerlerden yükleyebileceğimiz yada getirebileceğimiz paketler var
 //httpClient için injection ını yapnmamızı sağlayan modülü var
 import {HttpClientModule } from "@angular/common/http";
+import { TodoComponent } from './components/todo/todo.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {HttpClientModule } from "@angular/common/http";
     //ve module de bu componentleri kullanacağım diyerek ekledi !!
     ProductComponent,
     CategoryComponent,
-    NaviComponent
+    NaviComponent,
+    TodoComponent
   ],
   imports: [
     //bizim yazmadıklarımızı importa ekliyoruz !!
