@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/product';
 import { observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
 
 //axios,fetch
 @Component({
@@ -40,7 +42,8 @@ export class ProductComponent implements OnInit {
   //ctor da verdiğiniz değişken class içerisinde tanımlanmış bir değişken gibi oluyor ve buna heryerden erişebiliyoruz !!
 
   //bir service i kullanabilmek için yapman gereken bu!!
-  constructor(/*private httpClient:HttpClient*/ private productService: ProductService, private activatedRoot: ActivatedRoute) {}
+  constructor(/*private httpClient:HttpClient*/ private productService: ProductService, private activatedRoot: ActivatedRoute,private toastrService:ToastrService,
+    private cartService:CartService ) {}
   //activatedRoot  buil-in bir
 
   //constructor ın amacı product componenti bellekte oluşturmaktır. yani bir instance ını oluşturmaktır
@@ -99,4 +102,18 @@ export class ProductComponent implements OnInit {
         this.dataLoaded = true; //bu kod senkron çalışmamızı sağlıyor
       });
   }
+
+  addtoCart(product: Product){
+    if(product.productId ===1){
+      this.toastrService.error("Hata","Bu ürün sepete eklenemez!")
+    }
+    else{
+      this.toastrService.success("Sepete eklendi",product.productName)
+      this.cartService.addToCart(product);
+    }    
+  }
+
+
+// npm install ngx-toastr notification için bunu kuruyoruz 
+//npm install @angular/animations   anguların animasyon maketini kullandığı için bu toastr onuda kuruyoruz.
 }

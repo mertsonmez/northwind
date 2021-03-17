@@ -24,14 +24,18 @@
         <th>Fiyat</th>
         <th>Kdv'li Fiyat</th>
         <th>Stok Adedi</th>
+        <th></th>
     </thead>
-    <tr *ngFor="let product of products">
-        <td>{{product.productId}}</td>
-        <td>{{product.productName | uppercase }}</td><!--pipe(bunlar build-in pipe yani angular da kendinde olan)-->
-        <td>{{product.categoryId | lowercase }} </td><!--pipe-->
-        <td>{{product.unitPrice}}</td>
-        <td>{{product.unitPrice | vatAdded:10 | currency }}</td><!--piplara parametre verirken : 10 gibi |vatAdded:10:20:30 -->
-        <td>{{product.unitsInStock}}</td>
-    </tr>
+    <tbody>
+        <tr *ngFor="let product of products | filterPipe:filterText"><!--listenin kendisine uyguladığımız için bu pipe ı-->
+            <td>{{product.productId}}</td>
+            <td>{{product.productName | uppercase }}</td><!--pipe(bunlar build-in pipe yani angular da kendinde olan)-->
+            <td>{{product.categoryId | lowercase }} </td><!--pipe-->
+            <td>{{product.unitPrice}}</td>
+            <td>{{product.unitPrice | vatAdded:10 | currency }}</td><!--piplara parametre verirken : 10 gibi |vatAdded:10:20:30 -->
+            <td>{{product.unitsInStock}}</td>
+            <td><button (click)="addToCard(product)" type="button" class="btn btn-success">Sepete Ekle</button></td>
+        </tr>
+    </tbody>    
 </table>
 <!-- pipe elinizdeki veriyi görsel olarak daha farklı şekilde göstermek için kullanılır -->
