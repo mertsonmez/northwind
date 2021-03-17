@@ -3,19 +3,35 @@
 <div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>
+
+<div class="mb-3">
+    <label for="filterText" class="form-label">Ürün Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Arama ifadesi giriniz">
+</div>
+<!-- banana notation [()] araştır.-->
+<!-- filterText alanına inputu bağlamak için bunu yapmamız gerekiyor [(ngModel)]="filterText" -->
+<!-- 21.40 dk -->
+<div *ngIf="filterText" class="alert alert-success">
+    {{filterText}} aradınız
+</div>
+
+
 <table ngIf="dataLoaded == true" class="table">
     <thead>
         <th>Id</th>
         <th>Ürün Adı</th>
         <th>Kategori</th>
         <th>Fiyat</th>
+        <th>Kdv'li Fiyat</th>
         <th>Stok Adedi</th>
     </thead>
     <tr *ngFor="let product of products">
         <td>{{product.productId}}</td>
-        <td>{{product.productName}}</td>
-        <td>{{product.categoryId}}</td>
+        <td>{{product.productName | uppercase }}</td><!--pipe(bunlar build-in pipe yani angular da kendinde olan)-->
+        <td>{{product.categoryId | lowercase }} </td><!--pipe-->
         <td>{{product.unitPrice}}</td>
+        <td>{{product.unitPrice | vatAdded:10 | currency }}</td><!--piplara parametre verirken : 10 gibi |vatAdded:10:20:30 -->
         <td>{{product.unitsInStock}}</td>
     </tr>
 </table>
+<!-- pipe elinizdeki veriyi görsel olarak daha farklı şekilde göstermek için kullanılır -->

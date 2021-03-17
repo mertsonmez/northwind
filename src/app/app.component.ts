@@ -19,3 +19,4 @@ export class AppComponent {
   user: string = "Engin Demirog";
   
 }
+//pipe elimizde bir data var ve bunu farklı şekilde göstermek istiyorsak bu bağlamda pipe kullanırız.

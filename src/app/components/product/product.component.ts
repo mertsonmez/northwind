@@ -26,9 +26,7 @@ export class ProductComponent implements OnInit {
   // product4 = { productId: 4, productName: 'Keyboard', categoryId: 1, unitPrice: 5, unitsInStock: 5 }
   // product5 = { productId: 5, productName: 'Camera', categoryId: 1, unitPrice: 5, unitsInStock: 5 }
 
-  products: Product[] = [
-    /*this.product1 , this.product2 , this.product3 , this.product4 , this.product5*/
-  ]; // array []
+  products: Product[] = [/*this.product1 , this.product2 , this.product3 , this.product4 , this.product5*/]; // array []
   //buna şuan gerek kalmadı --
   // productResponseModel: ProductResponseModel={
   //   data: this.products,
@@ -37,6 +35,7 @@ export class ProductComponent implements OnInit {
   // };
   dataLoaded = false; //data koyduk yönetmek için
 
+  filterText=""; // default değer
   //burada private httpClient:HttpClient http client tipinde bir nesne istiyorum diyorsunuz !!
   //ctor da verdiğiniz değişken class içerisinde tanımlanmış bir değişken gibi oluyor ve buna heryerden erişebiliyoruz !!
 
