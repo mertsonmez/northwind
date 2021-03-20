@@ -11,7 +11,7 @@ import { Category } from '../models/category';
 export class CategoryService {
 
 
-  apiUrl = 'https://localhost:44300/api/categories/getall';
+  apiUrl = 'https://localhost:44300/api/Categories/getall';
 
   constructor(private httpClient: HttpClient) { }
 
