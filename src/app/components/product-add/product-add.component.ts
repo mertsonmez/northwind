@@ -30,6 +30,10 @@ export class ProductAddComponent implements OnInit {
     })
   }
 
+  add(){
+    
+  }
+
   // reactive formlar için forms module olması gerekiyor
   //bu8nun
 
