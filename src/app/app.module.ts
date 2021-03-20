@@ -12,13 +12,14 @@ import { NaviComponent } from './components/navi/navi.component';
 //farklı yerlerden yükleyebileceğimiz yada getirebileceğimiz paketler var
 //httpClient için injection ını yapnmamızı sağlayan modülü var
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms"; //ngModel keywordu ile binding yapıp çalışması için eklememiz gerekiyor
+import { FormsModule , ReactiveFormsModule } from "@angular/forms"; //ngModel keywordu ile binding yapıp çalışması için eklememiz gerekiyor
 import { TodoComponent } from './components/todo/todo.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 import{ ToastrModule } from "ngx-toastr";
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     TodoComponent,
     VatAddedPipe,
     FilterPipePipe,
-    CartSummaryComponent
+    CartSummaryComponent,
+    ProductAddComponent
   ],
   imports: [
     //bizim yazmadıklarımızı importa ekliyoruz !!
@@ -40,6 +42,7 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }) //forRoot demek toastr ı bizim projemiz için kullanılabilir hale getir demek
